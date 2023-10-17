@@ -15,8 +15,8 @@ public class MainMenu {
         }
 
         // 2. quiz mode
-        if (message.toLowerCase().startsWith("quiz")||message.toLowerCase().startsWith("/quiz")
-                || message.toLowerCase().startsWith("start") || message.toLowerCase().startsWith("/start")) {
+        if (message.equalsIgnoreCase("quiz")|| message.equalsIgnoreCase("/quiz")
+                || message.equalsIgnoreCase("start") || message.equalsIgnoreCase("/start")) {
             String quiz = """
                     Here are some options to get started:
                     
