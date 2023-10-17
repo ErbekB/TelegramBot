@@ -21,9 +21,9 @@ public class Bot extends TelegramLongPollingBot {
         else{
             sendResponse(chatId,menu.menu(messageReceived));
         }
-
     }
-    public void sendResponse(long chatId, String s) {
+
+    private void sendResponse(long chatId, String s) {
         SendMessage msg = new SendMessage();
         msg.setChatId(chatId);
         msg.setText(s);
