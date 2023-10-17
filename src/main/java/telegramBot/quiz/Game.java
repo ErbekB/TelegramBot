@@ -1,16 +1,25 @@
 package telegramBot.quiz;
 
 import java.util.List;
+import java.util.Random;
 
 public class Game {
     private List<Question> questionsList = this.initQuestions();
 
     private int score = 0;
 
-    public void start() {
+    public String start() {
+        String start = """
+                Great choice! 🚀 You've just started an exciting quiz game. 
+                Answer questions correctly to earn points and climb the leaderboard.
+                """;
+        return start;
     }
 
-    public void getQuestion(){
+    public Question getQuestion(){
+        Random r = new Random();
+        int index = r.nextInt(0, this.questionsList.size());
+        return (Question) this.questionsList.get(index);
     }
     private List<Question> initQuestions() {
         return List.of(

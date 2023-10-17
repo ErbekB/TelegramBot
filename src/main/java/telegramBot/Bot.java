@@ -13,6 +13,7 @@ import java.util.List;
 
 public class Bot extends TelegramLongPollingBot {
     private boolean firstTime = true;
+    private boolean inGame = false;
     private long chatId;
     MainMenu mainMenu;
     Game game;
@@ -29,9 +30,15 @@ public class Bot extends TelegramLongPollingBot {
             sendResponse(chatId, mainMenu.welcome());
             firstTime = false;
         }
+        else if(inGame){
+            game = new Game();
+            sendResponse(chatId, game.getQuestion().toString());
+        }
         else if(messageReceived.equalsIgnoreCase("startquiz") || messageReceived.equalsIgnoreCase("/startquiz")){
             game = new Game();
-            game.start();
+            sendResponse(chatId, game.start());
+            sendResponse(chatId, game.getQuestion().toString());
+            inGame = true;
         }
         else {
             sendResponse(chatId, mainMenu.menu(messageReceived));
