@@ -1,6 +1,6 @@
-package telegramBot;
+package telegramBot.quiz;
 
-public class Menu {
+public class MainMenu {
 
     public String menu(String message){
         // start to evaluate the messages you received
@@ -50,6 +50,7 @@ public class Menu {
         }
         return null;
     }
+    //Welcome text for every new chat
     public String welcome() {
         String welcome = "Welcome to the Quiz Bot! \uD83E\uDD16\uD83E\uDDE0\n" +
                 "I'll ask you questions on a variety of topics, and you can earn" +

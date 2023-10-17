@@ -4,22 +4,30 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import telegramBot.quiz.MainMenu;
 
 public class Bot extends TelegramLongPollingBot {
     private boolean firstTime = true;
+    MainMenu mainMenu = new MainMenu();
+    private long chatId;
     @Override
     public void onUpdateReceived(Update update) {
-        long chatId = update.getMessage().getChatId();
+        chatId = update.getMessage().getChatId();
         String messageReceived = update.getMessage().getText();
         System.out.println(messageReceived);
 
-        Menu menu = new Menu();
         if (firstTime){                             //Shows the welcome-text
-            sendResponse(chatId, menu.welcome());
+            sendResponse(chatId, mainMenu.welcome());
             firstTime = false;
         }
-        else{
-            sendResponse(chatId,menu.menu(messageReceived));
+        else if (messageReceived.toLowerCase().startsWith("startquiz") || messageReceived.toLowerCase().startsWith("/startquiz")) {
+            chatId = update.getMessage().getChatId();
+            String messageReceived2 = update.getMessage().getText();
+            sendResponse(chatId, "wie lange");
+            System.out.println(messageReceived2);
+        }
+        else {
+            sendResponse(chatId, mainMenu.menu(messageReceived));
         }
     }
 
