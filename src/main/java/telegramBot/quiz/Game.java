@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Game {
     private List<Question> questionsList = this.initQuestions();
-
+    private String rightAnswer;
     private int score = 0;
 
     public String start() {
@@ -19,8 +19,22 @@ public class Game {
     public Question getQuestion(){
         Random r = new Random();
         int index = r.nextInt(0, this.questionsList.size());
+        setRightAnswer(questionsList.get(index).getSolution());
         return (Question) this.questionsList.get(index);
     }
+    public String checkAnswer(String answer) {
+        if (answer.equalsIgnoreCase(rightAnswer)){
+            return "Richtig du HELD";
+        }
+        else {
+            return "Leider Falsch. " + rightAnswer + " wäre richtig gewesen";
+        }
+    }
+
+    public void setRightAnswer(String rightAnswer) {
+        this.rightAnswer = rightAnswer;
+    }
+
     private List<Question> initQuestions() {
         return List.of(
                 new Question("Japan", "What is the name of the popular Japanese dish made from fermented soybeans?",

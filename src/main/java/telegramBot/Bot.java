@@ -15,8 +15,8 @@ public class Bot extends TelegramLongPollingBot {
     private boolean firstTime = true;
     private boolean inGame = false;
     private long chatId;
-    MainMenu mainMenu;
-    Game game;
+    MainMenu mainMenu = new MainMenu();
+    Game game = new Game();
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -30,17 +30,16 @@ public class Bot extends TelegramLongPollingBot {
             sendResponse(chatId, mainMenu.welcome());
             firstTime = false;
         }
-        else if(inGame){
-            game = new Game();
+        else if(inGame){                            //Checks if the User is in a Game
+            sendResponse(chatId, game.checkAnswer(messageReceived));
             sendResponse(chatId, game.getQuestion().toString());
         }
-        else if(messageReceived.equalsIgnoreCase("startquiz") || messageReceived.equalsIgnoreCase("/startquiz")){
-            game = new Game();
+        else if(messageReceived.equalsIgnoreCase("startquiz") || messageReceived.equalsIgnoreCase("/startquiz")){ //Beginns a Game
             sendResponse(chatId, game.start());
             sendResponse(chatId, game.getQuestion().toString());
             inGame = true;
         }
-        else {
+        else {                                       //Displays the menu option if the User asked for it
             sendResponse(chatId, mainMenu.menu(messageReceived));
         }
     }

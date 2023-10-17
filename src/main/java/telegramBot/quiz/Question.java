@@ -15,6 +15,11 @@ public class Question {
         this.options = options;
         this.solution = solution;
     }
+
+    public String getSolution() {
+        return solution;
+    }
+
     public String toString() {
         String opt = (String)this.options.stream().collect(Collectors.joining("\n"));
         return this.title + "\n" + this.text + "\n" + opt;
