@@ -24,7 +24,6 @@ public class Bot extends TelegramLongPollingBot {
         String messageReceived = update.getMessage().getText();
         System.out.println(messageReceived);
 
-        
         if (firstTime){                             //Shows the welcome-text
             mainMenu = new MainMenu();
             sendResponse(chatId, mainMenu.welcome());
@@ -32,11 +31,14 @@ public class Bot extends TelegramLongPollingBot {
         }
         else if(inGame){                            //Checks if the User is in a Game
             sendResponse(chatId, game.checkAnswer(messageReceived));
-            sendResponse(chatId, game.getQuestion().toString());
+            inGame = game.state();
+            if (inGame){
+                sendResponse(chatId, game.getQuestion());
+            }
         }
         else if(messageReceived.equalsIgnoreCase("startquiz") || messageReceived.equalsIgnoreCase("/startquiz")){ //Beginns a Game
             sendResponse(chatId, game.start());
-            sendResponse(chatId, game.getQuestion().toString());
+            sendResponse(chatId, game.getQuestion());
             inGame = true;
         }
         else {                                       //Displays the menu option if the User asked for it
@@ -49,6 +51,7 @@ public class Bot extends TelegramLongPollingBot {
         SendMessage msg = new SendMessage();
         msg.setChatId(chatId);
         msg.setText(s);
+        msg.setParseMode("HTML");
 
         try {
             execute(msg);

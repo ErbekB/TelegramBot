@@ -1,5 +1,7 @@
 package telegramBot.quiz;
 
+import telegramBot.Bot;
+
 public class MainMenu {
 
     public String menu(String message){
