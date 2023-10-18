@@ -45,9 +45,9 @@ public class MainMenu {
         }
         // 4. Leaderboard
         if (message.toLowerCase().startsWith("bestlist") || message.toLowerCase().startsWith("/bestlist")) {
-
             return list.toString();
         }
+
         return null;
     }
     //Welcome text for every new chat

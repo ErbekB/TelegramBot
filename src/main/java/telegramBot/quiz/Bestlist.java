@@ -8,10 +8,6 @@ import java.util.Map;
 public class Bestlist {
     private Map<String, Integer> list = new HashMap<>();
 
-    public Map<String, Integer> getList() {
-        return list;
-    }
-
     public void setList(String name, Integer points) {
         Integer currentPoints = list.get(name);
 
