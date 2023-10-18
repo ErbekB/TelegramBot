@@ -6,27 +6,34 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import telegramBot.quiz.Bestlist;
 import telegramBot.quiz.Game;
 import telegramBot.quiz.MainMenu;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Bot extends TelegramLongPollingBot {
     private boolean firstTime = true;
     private boolean inGame = false;
-    private long chatId;
+    private Map<Long, Long> userChatIds = new HashMap<>();
     MainMenu mainMenu = new MainMenu();
     Game game = new Game();
+    Bestlist list = new Bestlist();
 
     @Override
     public void onUpdateReceived(Update update) {
-        chatId = update.getMessage().getChatId();
+        long chatId = update.getMessage().getChatId();
         String messageReceived = update.getMessage().getText();
         String playerName = update.getMessage().getFrom().getFirstName();
         System.out.println(messageReceived);
 
+//        if (!userChatIds.containsKey(chatId)) {
+//            userChatIds.put(chatId, chatId); // Jeder Benutzer erhält seine eigene chatId
+//        }
+
         if (firstTime){                             // Shows the welcome-text
-            mainMenu = new MainMenu();
             sendResponse(chatId, mainMenu.welcome());
             firstTime = false;
         }
@@ -37,16 +44,17 @@ public class Bot extends TelegramLongPollingBot {
                 sendResponse(chatId, game.getQuestion());
             }
             else{                                   // After the last Question we send the Score
-                sendResponse(chatId, game.playerPoints(playerName));
+                sendResponse(chatId, game.playerPoints(playerName, list));
             }
         }
-        else if(messageReceived.equalsIgnoreCase("startquiz") || messageReceived.equalsIgnoreCase("/startquiz")){ //Beginns a Game
+        else if(messageReceived.equalsIgnoreCase("startquiz") || messageReceived.equalsIgnoreCase("/startquiz") ||
+                messageReceived.equalsIgnoreCase("startgame") || messageReceived.equalsIgnoreCase("/startgame")){ //Beginns a Game
             sendResponse(chatId, game.start());
             sendResponse(chatId, game.getQuestion());
             inGame = true;
         }
         else {                                       // Displays the menu option if the User asked for it
-            sendResponse(chatId, mainMenu.menu(messageReceived));
+            sendResponse(chatId, mainMenu.menu(messageReceived, list));
         }
     }
 

@@ -29,7 +29,7 @@ public class Question {
     }
 
     public String toString() {
-        String title = "\uD83D\uDCDA                 " + "<b>" +this.title + "</b>";
+        String title = "\uD83D\uDCDA" + "<b>" +this.title + "</b>";
         StringBuilder format = new StringBuilder();
 
         String optionA = String.format("<b>%c)</b> %s       ", 'a', this.options.get(0));

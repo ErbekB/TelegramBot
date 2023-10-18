@@ -1,15 +1,13 @@
 package telegramBot.quiz;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Game {
 
     private final List<Question> questionsList = this.initQuestions();
     private List<String> rightAnswers;
     private int gameStatus;
-    private int points = 0;
+    private int points;
 
     public String start() {                                                     // The User starts the Game and receives a Message
         String start = """
@@ -17,6 +15,7 @@ public class Game {
                 Answer questions correctly to earn points and climb the leaderboard.
                 """;
         gameStatus = 1;
+        points = 0;
         return start;
     }
 
@@ -54,7 +53,9 @@ public class Game {
         }
     }
 
-    public String playerPoints(String playerName) {
+    public String playerPoints(String playerName, Bestlist list) {
+        list.setList(playerName, points);
+
         String message = "🎮 Player: " + playerName + "\n";
         message += "🌟 Points: " + points;
         return message;
@@ -63,7 +64,7 @@ public class Game {
     private List<Question> initQuestions() {
         return List.of(
                 new Question("Japan", "What is the name of the popular Japanese dish made from fermented soybeans?",
-                        List.of("Sushi", "Ramen", "Miso", "Tempura"), "Miso", "b"),
+                        List.of("Sushi", "Ramen", "Miso", "Tempura"), "Miso", "c"),
                 new Question("Shakespeare", "In which famous Shakespearean play does the character Othello appear?",
                         List.of("Macbeth", "Romeo and Juliet", "Othello", "Hamlet"), "Othello", "c"),
                 new Question("Human Body", "What is the largest organ in the human body?",

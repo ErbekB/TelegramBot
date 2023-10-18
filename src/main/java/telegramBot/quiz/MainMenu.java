@@ -4,7 +4,7 @@ import telegramBot.Bot;
 
 public class MainMenu {
 
-    public String menu(String message){
+    public String menu(String message, Bestlist list){
         // start to evaluate the messages you received
         // 1. Main menu
         if (message.toLowerCase().startsWith("hello") ||message.toLowerCase().startsWith("/hello")) {
@@ -45,10 +45,8 @@ public class MainMenu {
         }
         // 4. Leaderboard
         if (message.toLowerCase().startsWith("bestlist") || message.toLowerCase().startsWith("/bestlist")) {
-            String help = """
-                    Not rdy yet :(
-                    """;
-            return help;
+
+            return list.toString();
         }
         return null;
     }
