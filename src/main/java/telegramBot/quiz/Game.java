@@ -8,7 +8,7 @@ public class Game {
     private List<Question> questionsList = this.initQuestions();
     private String rightAnswer;
     private int gameStatus;
-    private int score = 0;
+    private int points = 0;
 
     public String start() {                                                     // The User starts the Game and receives a Message
         String start = """
@@ -18,16 +18,17 @@ public class Game {
         gameStatus = 1;
         return start;
     }
+
     public boolean state() {
         int gameLength = 3;
         if (gameStatus < gameLength) {
             gameStatus += 1;
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
+
     public String getQuestion() {
         Random r = new Random();
         int index = r.nextInt(0, this.questionsList.size());              // Gets a random Question from the List
@@ -35,17 +36,26 @@ public class Game {
         setRightAnswer(questionsList.get(index).getSolution());                 // Sets the "rightAnswer" attribute
         return this.questionsList.get(index).toString();
     }
+
     public void setRightAnswer(String rightAnswer) {
         this.rightAnswer = rightAnswer;
     }
+
     public String checkAnswer(String answer) {
         if (answer.equalsIgnoreCase(rightAnswer)) {
-            score += 5;
+            points += 5;
             return "✅ That's correct!";
         } else {
             return "❌ That's incorrect. The answer is <b>" + rightAnswer + "</b>.";
         }
     }
+
+    public String playerPoints(String playerName) {
+        String message = "🎮 Player: " + playerName + "\n";
+        message += "🌟 Points: " + points;
+        return message;
+    }
+
     private List<Question> initQuestions() {
         return List.of(
                 new Question("Japan", "What is the name of the popular Japanese dish made from fermented soybeans?",

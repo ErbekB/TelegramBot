@@ -22,18 +22,22 @@ public class Bot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         chatId = update.getMessage().getChatId();
         String messageReceived = update.getMessage().getText();
+        String playerName = update.getMessage().getFrom().getFirstName();
         System.out.println(messageReceived);
 
-        if (firstTime){                             //Shows the welcome-text
+        if (firstTime){                             // Shows the welcome-text
             mainMenu = new MainMenu();
             sendResponse(chatId, mainMenu.welcome());
             firstTime = false;
         }
-        else if(inGame){                            //Checks if the User is in a Game
+        else if(inGame){                            // Checks if the User is in a Game
             sendResponse(chatId, game.checkAnswer(messageReceived));
             inGame = game.state();
-            if (inGame){
+            if (inGame){                            // Checks if we the last Question is asked
                 sendResponse(chatId, game.getQuestion());
+            }
+            else{                                   // After the last Question we send the Score
+                sendResponse(chatId, game.playerPoints(playerName));
             }
         }
         else if(messageReceived.equalsIgnoreCase("startquiz") || messageReceived.equalsIgnoreCase("/startquiz")){ //Beginns a Game
@@ -41,7 +45,7 @@ public class Bot extends TelegramLongPollingBot {
             sendResponse(chatId, game.getQuestion());
             inGame = true;
         }
-        else {                                       //Displays the menu option if the User asked for it
+        else {                                       // Displays the menu option if the User asked for it
             sendResponse(chatId, mainMenu.menu(messageReceived));
         }
     }
