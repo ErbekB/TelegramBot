@@ -17,7 +17,7 @@ import java.util.Map;
 public class Bot extends TelegramLongPollingBot {
     private boolean firstTime = true;
     private boolean inGame = false;
-    private Map<Long, Long> userChatIds = new HashMap<>();
+    private Map<Long, Game> userChatIds = new HashMap<>();
     MainMenu mainMenu = new MainMenu();
     Game game = new Game();
     Bestlist list = new Bestlist();
@@ -30,7 +30,7 @@ public class Bot extends TelegramLongPollingBot {
         System.out.println(messageReceived);
 
 //        if (!userChatIds.containsKey(chatId)) {
-//            userChatIds.put(chatId, chatId); // Jeder Benutzer erhält seine eigene chatId
+//            userChatIds.put(chatId, chatId);         // Jeder Benutzer erhält seine eigene chatId
 //        }
 
         if (firstTime){                             // Shows the welcome-text

@@ -20,7 +20,7 @@ public class Game {
     }
 
     public boolean state() {
-        int gameLength = 3;
+        int gameLength = 5;
         if (gameStatus < gameLength) {
             gameStatus += 1;
             return true;
