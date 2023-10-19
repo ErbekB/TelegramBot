@@ -16,6 +16,14 @@ public class Bestlist {
         }
     }
 
+    public Map<String, Integer> getList() {
+        return list;
+    }
+
+    public void setList(Map<String, Integer> list) {
+        this.list = list;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("\uD83C\uDFC6Bestlist:\n\n");

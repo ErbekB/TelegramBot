@@ -8,6 +8,7 @@ public class Game {
     private List<String> rightAnswers;
     private int gameStatus;
     private int points;
+    private boolean inGame;
 
     public String start() {                                                     // The User starts the Game and receives a Message
         String start = """
@@ -58,7 +59,17 @@ public class Game {
 
         String message = "🎮 Player: " + playerName + "\n";
         message += "🌟 Points: " + points;
+        message += "\n\n Play again   /startgame";
+        message += "\n Check leaderboard   /bestlist";
         return message;
+    }
+
+    public boolean isOn() {
+        return inGame;
+    }
+
+    public void setInGame(boolean inGame) {
+        this.inGame = inGame;
     }
 
     private List<Question> initQuestions() {
@@ -71,10 +82,6 @@ public class Game {
                         List.of("Brain", "Liver", "Heart", "Skin"), "Skin", "d"),
                 new Question("Paintings", "Who painted the famous artwork \"Mona Lisa\"?",
                         List.of("Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Michelangelo"), "Leonardo da Vinci", "c"),
-                new Question("Japan", "What is the name of the popular Japanese dish made from fermented soybeans?",
-                        List.of("Sushi", "Ramen", "Miso", "Tempura"), "Miso", "c"),
-                new Question("Shakespeare", "In which famous Shakespearean play does the character Othello appear?",
-                        List.of("Macbeth", "Romeo and Juliet", "Othello", "Hamlet"), "Othello", "c"),
                 new Question("Geography", "What is the largest continent in the world?",
                         List.of("Asia", "Africa", "North America", "Australia"), "Asia", "a"),
                 new Question("Science", "What is the chemical symbol for gold?",
@@ -130,7 +137,45 @@ public class Game {
                 new Question("Food", "What is the main ingredient in traditional Japanese miso soup?",
                         List.of("Seaweed", "Tofu", "Rice", "Noodles"), "Tofu", "b"),
                 new Question("Music", "Who released the album 'Thriller,' which is the best-selling album of all time?",
-                        List.of("Elton John", "Madonna", "The Rolling Stones", "Michael Jackson"), "Michael Jackson", "d")
-        );
+                        List.of("Elton John", "Madonna", "The Rolling Stones", "Michael Jackson"), "Michael Jackson", "d"),
+                new Question("Movies", "Which actor played the character of Neo in 'The Matrix' trilogy?",
+                        List.of("Keanu Reeves", "Will Smith", "Tom Cruise", "Brad Pitt"), "Keanu Reeves", "a"),
+                new Question("Science", "What is the chemical symbol for hydrogen?",
+                        List.of("Hg", "He", "H", "H2"), "H", "c"),
+                new Question("Art", "Who painted the 'The Starry Night'?",
+                        List.of("Pablo Picasso", "Vincent van Gogh", "Claude Monet", "Leonardo da Vinci"), "Vincent van Gogh", "b"),
+                new Question("Geography", "Which country is the largest by land area?",
+                        List.of("Russia", "Canada", "China", "United States"), "Russia", "a"),
+                new Question("Music", "Which British rock band released the album 'The Dark Side of the Moon'?",
+                        List.of("The Rolling Stones", "Led Zeppelin", "Pink Floyd", "The Who"), "Pink Floyd", "c"),
+                new Question("Sports", "In which sport is the term 'hat-trick' commonly used?",
+                        List.of("Cricket", "Soccer", "Tennis", "Baseball"), "Cricket", "a"),
+                new Question("History", "Who was the first Emperor of Rome?",
+                        List.of("Julius Caesar", "Augustus", "Nero", "Caligula"), "Augustus", "b"),
+                new Question("Food", "What is the main ingredient in a traditional Greek salad?",
+                        List.of("Lettuce", "Tomato", "Cucumber", "Feta cheese"), "Feta cheese", "d"),
+                new Question("Science", "What is the chemical symbol for silver?",
+                        List.of("Ag", "Si", "Sv", "Sl"), "Ag", "a"),
+                new Question("Movies", "Which 1975 film directed by Steven Spielberg was about a man-eating great white shark?",
+                        List.of("E.T. the Extra-Terrestrial", "Jurassic Park", "Jaws", "Close Encounters of the Third Kind"), "Jaws", "c"),
+                new Question("Geography", "What is the world's largest ocean?",
+                        List.of("Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"), "Pacific Ocean", "d"),
+                new Question("Art", "Which Italian artist is known for his famous sculpture 'David'?",
+                        List.of("Michelangelo", "Leonardo da Vinci", "Raphael", "Donatello"), "Michelangelo", "a"),
+                new Question("Music", "Who is known as the 'Queen of Pop'?",
+                        List.of("Madonna", "Britney Spears", "Celine Dion", "Whitney Houston"), "Madonna", "a"),
+                new Question("Sports", "In which country did the sport of judo originate?",
+                        List.of("Japan", "South Korea", "China", "Brazil"), "Japan", "a"),
+                new Question("History", "Who is known for being the first woman to fly solo across the Atlantic Ocean?",
+                        List.of("Amelia Earhart", "Bessie Coleman", "Harriet Quimby", "Valentina Tereshkova"), "Amelia Earhart", "a"),
+                new Question("Food", "What is the primary ingredient in guacamole?",
+                        List.of("Tomatoes", "Mangoes", "Avocado", "Pineapple"), "Avocado", "c"),
+                new Question("Science", "What is the chemical symbol for carbon?",
+                        List.of("C", "Co", "Cr", "Ca"), "C", "a"),
+                new Question("Movies", "Who directed the film 'Eternal Sunshine of the Spotless Mind'?",
+                        List.of("Quentin Tarantino", "Christopher Nolan", "Spike Jonze", "Michel Gondry"), "Michel Gondry", "d"),
+                new Question("Geography", "Which African country is known as the 'Land of a Thousand Hills'?",
+                        List.of("Kenya", "Tanzania", "Rwanda", "Uganda"), "Rwanda", "c")
+                );
     }
 }

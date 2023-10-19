@@ -1,9 +1,6 @@
 package telegramBot.quiz;
 
-import telegramBot.Bot;
-
 public class MainMenu {
-
     public String menu(String message, Bestlist list){
         // start to evaluate the messages you received
         // 1. Main menu
@@ -11,7 +8,7 @@ public class MainMenu {
             String hello = """
                     Hello there! 👋 Welcome to the Quiz Bot. How can I assist you today? 
                     If you'd like to start a quiz, simply type /start or send 'Start.' 
-                    If you have any questions or need help, feel free to ask. Have a great time quizzing!
+                    If you have any questions or need /help, feel free to ask. Have a great time quizzing!
                     """;
             return hello;
         }
@@ -48,18 +45,26 @@ public class MainMenu {
             return list.toString();
         }
 
+        // 5. PVP
+        if (message.toLowerCase().startsWith("startpvp") || message.toLowerCase().startsWith("/startpvp")) {
+            return "still in process  \uD83D\uDD04";
+        }
+
+        // 6. Play vs friend
+        if (message.toLowerCase().startsWith("startfriend") || message.toLowerCase().startsWith("/startfriend")) {
+            return "still in process  \uD83D\uDD04";
+        }
+
         return null;
     }
     //Welcome text for every new chat
     public String welcome() {
-        String welcome = "Welcome to the Quiz Bot! \uD83E\uDD16\uD83E\uDDE0\n" +
-                "I'll ask you questions on a variety of topics, and you can earn" +
-                " points for each correct answer. If you're not sure about something," +
-                " don't worry, it's all about learning!" +
-                " To start, simply type /start or just send me 'Start' to begin a quiz." +
-                " If you need any assistance or have questions, feel free to type /help." +
-                " Good luck, and may the best quizzers win! \uD83C\uDFC6\uD83C\uDF1F";
-
+        String welcome = """
+                    Hello there! 👋 Welcome to the Quiz Bot. How can I assist you today? 
+                    If you'd like to start a quiz, simply type /start or send 'Start.' 
+                    If you have any questions or need /help, feel free to ask. Have a great time quizzing!
+                    """;
         return welcome;
     }
+
 }
